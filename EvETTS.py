@@ -19,6 +19,7 @@ engine = pyttsx3.init()
 last_message = ""
 
 while(1):
+    # print(newest(log_dir))
     with open(newest(log_dir), "r", encoding="utf-16", errors="ignore") as f:
         lines = f.readlines()
 
@@ -26,10 +27,11 @@ while(1):
         lines = lines[lines.str.contains("|".join(names))]
         lines = lines.str.strip("\n")
         lines = lines.str.split(r"(Meg theonlyone >|JJ Mastersen >)", expand=True)
-        lines = lines
 
-        print(lines)
-        newest_message = lines[2].values[-1]        
+        newest_message = ""
+
+        if not lines.empty:
+            newest_message = lines[2].values[-1]        
         
 
         if newest_message != last_message:
