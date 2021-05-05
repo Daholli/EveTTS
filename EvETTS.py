@@ -4,7 +4,6 @@ import os
 import time
 import pandas as pd
 
-
 log_dir = os.path.expanduser("~/Documents/Eve/logs/Chatlogs")
 
 names = ["JJ Masterson", "Meg theonlyone"]
@@ -15,6 +14,7 @@ def newest(path):
     return max(paths, key=os.path.getmtime)
 
 engine = pyttsx3.init()
+engine.setProperty("rate", 125)
 
 last_message = ""
 
