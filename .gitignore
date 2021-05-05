@@ -11,7 +11,6 @@ __pycache__/
 build/
 develop-eggs/
 dist/
-!dist/EvETTS/.gitkeep
 downloads/
 eggs/
 .eggs/
@@ -128,5 +127,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-!dist/EvETTS/EvETTS.exe
