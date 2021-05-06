@@ -7,14 +7,14 @@ name = "pypi"
 pyttsx3 = "*"
 pandas = "*"
 pyqt5 = "*"
-isort = "*"
 
 [dev-packages]
 autopep8 = "*"
-flake8 = "*"
-coverage = "*"
-pre-commit = "*"
 black = "*"
+coverage = "*"
+flake8 = "*"
+isort = "*"
+pre-commit = "*"
 
 [requires]
 python_version = "3.9"
