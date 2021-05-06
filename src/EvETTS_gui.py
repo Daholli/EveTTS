@@ -2,7 +2,6 @@ import os
 import sys
 import time
 
-from EvETTS import TTS
 from PyQt5.QtCore import Qt, QThread
 from PyQt5.QtGui import QColor, QIcon
 from PyQt5.QtWidgets import (
@@ -21,7 +20,9 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
     QWidget,
 )
-from utils import TTS_variables as tts
+
+from src.EvETTS import TTS
+from src.utils import TTS_variables as tts
 
 
 class EvETTSGUI(QMainWindow):

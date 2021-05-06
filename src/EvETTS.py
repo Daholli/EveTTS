@@ -7,7 +7,8 @@ import pyttsx3
 from PyQt5.QtCore import QObject, pyqtSignal
 from PyQt5.QtWidgets import *
 from pyttsx3.drivers import sapi5
-from utils import TTS_variables as tts
+
+from src.utils import TTS_variables as tts
 
 logging.basicConfig(format="%(message)s", level=logging.INFO)
 
