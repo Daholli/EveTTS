@@ -160,6 +160,7 @@ class EvETTSGUI(QMainWindow):
             return
 
         self.updateChatHistory()
+        self.saveConfig()
 
         self.thread = QThread()
         tts.settings["tts_enabled"] = True
