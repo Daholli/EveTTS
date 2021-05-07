@@ -1,11 +1,11 @@
 {
     "channelNames": [
-        ""
+        "Corp"
     ],
     "characterNames": [
-        ""
+        "Dravynea Uta"
     ],
     "tts_enabled": false,
     "tts_rate": 135,
-    "tts_volume": 99
+    "tts_volume": 78
 }

@@ -4,18 +4,19 @@ import time
 
 import pandas as pd
 import pyttsx3
-from PyQt5.QtCore import QObject, pyqtSignal
-from PyQt5.QtWidgets import *
+from PySide2 import QtCore, QtWidgets
+from PySide2.QtCore import QObject, Signal
+from PySide2.QtWidgets import *
 from pyttsx3.drivers import sapi5
 
-from src.utils import TTS_variables as tts
+import src.TTS_variables as tts
 
 logging.basicConfig(format="%(message)s", level=logging.INFO)
 
 
 class TTS(QObject):
-    finished = pyqtSignal()
-    new_message = pyqtSignal()
+    finished = Signal()
+    new_message = Signal()
 
     def __init__(self):
         super().__init__()
@@ -73,6 +74,6 @@ class TTS(QObject):
                     except RuntimeError:
                         # print(re)
                         pass
-            time.sleep(1)
+            time.sleep(0.5)
         self.engine.stop()
         self.finished.emit()
