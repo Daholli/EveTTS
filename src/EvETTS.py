@@ -59,13 +59,14 @@ class TTS(QObject):
                 for name in tts.settings["characterNames"]:
                     splitString += name + r" >|"
                 splitString = splitString[:-1]
+
                 lines = lines.str.split(splitString, expand=True)
 
                 if not lines.empty:
                     self.new_message.emit()
                     self.newest_message = lines[1].values[-1]
 
-                if self.newest_message != tts.chatHistory[-1]:
+                if self.newest_message not in tts.chatHistory[-5:]:
                     tts.chatHistory.append(self.newest_message)
                     self.last_message = self.newest_message
                     self.engine.say(self.newest_message)
@@ -74,6 +75,6 @@ class TTS(QObject):
                     except RuntimeError:
                         # print(re)
                         pass
-            time.sleep(0.5)
+            time.sleep(0.1)
         self.engine.stop()
         self.finished.emit()

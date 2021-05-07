@@ -25,6 +25,7 @@ from PySide2.QtCore import (
     Qt,
     QThread,
     QUrl,
+    QRegExp,
 )
 from PySide2.QtGui import (
     QBrush,
@@ -39,6 +40,7 @@ from PySide2.QtGui import (
     QPalette,
     QPixmap,
     QRadialGradient,
+    QTextDocument,
 )
 from PySide2.QtWidgets import *
 
@@ -1076,7 +1078,7 @@ class Ui_MainWindow(object):
         )
         self.btn_stopTTS.clicked.connect(self.stopTTS)
 
-        self.chatHistory_grid.addWidget(self.chatHistory, 0, 0, 1, 5)
+        self.chatHistory_grid.addWidget(self.chatHistory, 0, 0, 1, 6)
         self.chatHistory_grid.addWidget(self.btn_clearHistory, 2, 0)
         self.chatHistory_grid.addWidget(self.btn_startTTS, 2, 4)
         self.chatHistory_grid.addWidget(self.btn_stopTTS, 2, 5)
@@ -1203,8 +1205,9 @@ class Ui_MainWindow(object):
         self.volumeSlider.valueChanged.connect(self.volumeSliderMoved)
 
         self.volumeDisplay = QLabel("Volume: {}".format(tts.settings["tts_volume"]))
-        self.volumeDisplay.setMinimumWidth(100)
+        self.volumeDisplay.setMinimumWidth(150)
         self.volumeDisplay.setFont(self.font7)
+        self.volumeDisplay.setAlignment(Qt.AlignCenter)
 
         self.rateSlider = QSlider(self.frame_content_wid_1)
         self.rateSlider.setObjectName(u"rateSlider")
@@ -1215,8 +1218,9 @@ class Ui_MainWindow(object):
         self.rateSlider.valueChanged.connect(self.rateSliderMoved)
 
         self.rateDisplay = QLabel("Rate: {}".format(tts.settings["tts_rate"]))
-        self.rateDisplay.setMinimumWidth(100)
+        self.rateDisplay.setMinimumWidth(150)
         self.rateDisplay.setFont(self.font7)
+        self.rateDisplay.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.lineEdit1, 0, 0, 1, 2)
         self.gridLayout.addWidget(self.lineEdit2, 0, 2, 1, 2)
@@ -1339,6 +1343,7 @@ class Ui_MainWindow(object):
         if tts.settings["tts_enabled"]:
             return
 
+        tts.chatHistory.append("Starting TTS..")
         self.updateChatHistory()
         self.saveConfig()
 
@@ -1362,18 +1367,28 @@ class Ui_MainWindow(object):
         self.thread.start()
 
     def stopTTS(self):
-        tts.settings["tts_enabled"] = False
+        tts.chatHistory.append("Stopping TTS..")
+        self.saveConfig()
 
     def clearChatHistory(self):
-        tts.chatHistory = ["Booting up TTS..."]
         self.stopTTS()
+        tts.chatHistory = ["Booting up..."]
+        self.chatHistory.clear()
         self.updateChatHistory()
 
     def updateChatHistory(self):
-        self.chatHistory.setText("\n".join(tts.chatHistory))
+        regex = QRegExp(tts.chatHistory[-1])
+        pos = 0
+        index = regex.indexIn(self.chatHistory.toPlainText(), pos)
+        if (index == -1):
+            self.chatHistory.append(tts.chatHistory[-1])
+        else:
+            return
 
     def saveConfig(self):
-        self.stopTTS()
+        tts.chatHistory.append("Saving...")
+        self.updateChatHistory()
         tts.settings["channelNames"] = self.lineEdit2.text().split(",")
         tts.settings["characterNames"] = self.lineEdit1.text().split(",")
+        tts.settings["tts_enabled"] = False
         tts.saveConfig()

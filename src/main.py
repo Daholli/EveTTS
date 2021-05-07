@@ -53,7 +53,6 @@ from PySide2.QtGui import (
 from PySide2.QtWidgets import *
 
 import src.TTS_variables as tts
-
 # GUI FILE
 from src.app_modules import *
 
@@ -183,6 +182,7 @@ class MainWindow(QMainWindow):
 
         # SHOW ==> MAIN WINDOW
         ########################################################################
+        self.ui.updateChatHistory()
         self.show()
         ## ==> END ##
 

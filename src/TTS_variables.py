@@ -2,7 +2,7 @@ import json
 
 settings = {
     "characterNames": [],
-    "channelNames": [],
+    "channelNames": ["Corp", "Fleet"],
     "tts_enabled": False,
     "tts_volume": 99,
     "tts_rate": 135,
