@@ -11,26 +11,26 @@ repos:
     - id: isort
 
 # black
-- repo: https://github.com/ambv/black
-  rev: 20.8b1
-  hooks:
-    - id: black
-      args:
-        - --line-length=88
-        - --include="\.pyi?$"
-        - --exclude="""\.git |
-          \.__pycache__|
-          \.hg|
-          \.mypy_cache|
-          \.tox|
-          \.venv|
-          \.htmlcov|
-          _build|
-          buck-out|
-          build|
-          dist"""
+# - repo: https://github.com/ambv/black
+#   rev: 20.8b1
+#   hooks:
+#     - id: black
+#       args:
+#         - --line-length=88
+#         - --include="\.pyi?$"
+#         - --exclude="""\.git |
+#           \.__pycache__|
+#           \.hg|
+#           \.mypy_cache|
+#           \.tox|
+#           \.venv|
+#           \.htmlcov|
+#           _build|
+#           buck-out|
+#           build|
+#           dist"""
 
-      language_version: python3.9
+#       language_version: python3.9
 
 # flake8
 - repo: https://gitlab.com/pycqa/flake8
