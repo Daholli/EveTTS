@@ -14,11 +14,12 @@
 ##
 ################################################################################
 
-# IMPORT FUNCTIONS
-from src.ui_functions import *
 
 # GUI FILE
 from src.ui_main import Ui_MainWindow
 
 # IMPORT QSS CUSTOM
 from src.ui_styles import Style
+
+# IMPORT FUNCTIONS
+from src.ui_functions import UIFunctions
