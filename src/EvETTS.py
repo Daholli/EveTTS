@@ -66,7 +66,7 @@ class TTS(QObject):
                     self.new_message.emit()
                     self.newest_message = lines[1].values[-1]
 
-                if self.newest_message not in tts.chatHistory[-5:]:
+                if self.newest_message != tts.chatHistory[-1]:
                     tts.chatHistory.append(self.newest_message)
                     self.last_message = self.newest_message
                     self.engine.say(self.newest_message)

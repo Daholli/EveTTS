@@ -21,11 +21,11 @@ from PySide2.QtCore import (
     QObject,
     QPoint,
     QRect,
+    QRegExp,
     QSize,
     Qt,
     QThread,
     QUrl,
-    QRegExp,
 )
 from PySide2.QtGui import (
     QBrush,
@@ -47,6 +47,8 @@ from PySide2.QtWidgets import *
 import src.files_rc
 import src.TTS_variables as tts
 from src.EvETTS import TTS
+
+import re
 
 
 class Ui_MainWindow(object):
@@ -1377,12 +1379,17 @@ class Ui_MainWindow(object):
         self.updateChatHistory()
 
     def updateChatHistory(self):
-        regex = QRegExp(tts.chatHistory[-1])
-        pos = 0
-        index = regex.indexIn(self.chatHistory.toPlainText(), pos)
+        regex = QRegExp(re.escape(tts.chatHistory[-1]))
+        index = regex.lastIndexIn(self.chatHistory.toPlainText())
         if (index == -1):
             self.chatHistory.append(tts.chatHistory[-1])
+        elif (len(self.chatHistory.toPlainText()) - index > len(tts.chatHistory[-1])):
+            print("diff: ", len(self.chatHistory.toPlainText()) - index,
+                  "msg_length: ", len(tts.chatHistory[-1]))
+            self.chatHistory.append(tts.chatHistory[-1])
         else:
+            print("diff: ", len(self.chatHistory.toPlainText()) - index,
+                  "msg_length: ", len(tts.chatHistory[-1]))
             return
 
     def saveConfig(self):
